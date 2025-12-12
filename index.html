@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الطالب الباحث - ميلود بولنوار</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <style>
+        :root { color-scheme: light; }
+        body { font-family: "Cairo", sans-serif; background: radial-gradient(circle at top, #e7f5ee 0%, #f4f6f9 100%); min-height: 100vh; transition: all 0.5s ease; }
+        body.dark-mode { background: radial-gradient(circle at top, #0f172a 0%, #020617 100%); color: #e2e8f0; }
+        body.dark-mode .glass-panel { background: rgba(30, 41, 59, 0.9); border-color: rgba(255,255,255,0.1); color: white; }
+        body.dark-mode input, body.dark-mode textarea { background-color: #1e293b; color: white; border-color: #475569; }
+        .glass-panel { background: rgba(255, 255, 255, 0.9); border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid rgba(255,255,255,0.8); backdrop-filter: blur(12px); }
+        .ticker-wrap { overflow: hidden; white-space: nowrap; }
+        .ticker { display: inline-block; animation: ticker 30s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="py-8 text-center space-y-4 border-b border-emerald-100 bg-white/50 backdrop-blur-sm">
+        <div class="flex items-center justify-center gap-3 text-xs font-bold text-gray-500 tracking-widest uppercase">
+            <span>الجمهورية الجزائرية الديمقراطية الشعبية</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+            <span>وزارة التعليم العالي والبحث العلمي</span>
+        </div>
+        
+        <div class="relative w-24 h-24 mx-auto drop-shadow-2xl">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Emblem_of_Algeria.svg/300px-Emblem_of_Algeria.svg.png" alt="شعار الجزائر" class="w-full h-full object-contain">
+        </div>
+
+        <div>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-emerald-800 font-[Amiri]">جامعة الدكتور مولاي الطاهر - سعيدة</h1>
+            <p class="text-lg font-semibold text-emerald-600 mt-2">كلية الحقوق والعلوم السياسية</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-6xl space-y-8">
+
+        <nav class="glass-panel p-2 flex justify-between items-center sticky top-4 z-50">
+            <div class="flex gap-2">
+                <button onclick="document.getElementById('home').scrollIntoView()" class="px-4 py-2 font-bold text-emerald-800 hover:bg-emerald-50 rounded-xl">الرئيسية</button>
+                <button onclick="document.getElementById('notes').scrollIntoView()" class="px-4 py-2 font-bold text-emerald-800 hover:bg-emerald-50 rounded-xl">الملاحظات</button>
+            </div>
+            <button id="themeBtn" class="px-4 py-2 bg-slate-800 text-white rounded-xl shadow hover:bg-slate-700 flex items-center gap-2">
+                <i class="fas fa-moon"></i> <span>ليلي</span>
+            </button>
+        </nav>
+
+        <section id="home" class="glass-panel p-8 bg-gradient-to-br from-emerald-900 to-slate-900 text-white rounded-3xl relative overflow-hidden">
+            <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+                <div class="w-24 h-24 bg-white/10 rounded-full flex items-center justify-center text-4xl border-2 border-emerald-400">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="text-center md:text-right flex-1">
+                    <h2 class="text-4xl font-bold font-[Amiri]">الطالب: ميلود بولنوار</h2>
+                    <p class="text-emerald-300 text-lg mt-1">السنة الثانية ليسانس | تخصص حقوق</p>
+                    <div class="mt-4"><span class="bg-emerald-600 px-3 py-1 rounded-full text-xs font-bold">مدير المنصة</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="notes" class="glass-panel p-6">
+            <h3 class="text-2xl font-bold text-emerald-700 mb-4">التدوين القانوني</h3>
+            <form id="noteForm" class="flex gap-2 mb-4">
+                <input type="text" id="noteInput" class="w-full p-3 rounded-xl border" placeholder="اكتب فكرة..." required>
+                <button type="submit" class="bg-emerald-600 text-white px-4 rounded-xl">حفظ</button>
+            </form>
+            <div id="notesList" class="space-y-3"></div>
+        </section>
+
+        <section class="glass-panel p-6 text-center">
+            <h3 class="text-2xl font-bold text-emerald-700 mb-2">غرفة التركيز</h3>
+            <div class="text-6xl font-black text-slate-800 mb-4 font-[Amiri]" id="timer">25:00</div>
+            <button id="startBtn" class="px-8 py-3 bg-emerald-600 text-white rounded-full font-bold shadow-lg">بدء الجلسة</button>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 text-gray-500 text-sm">© 2025 الطالب الباحث: ميلود بولنوار</footer>
+
+    <script>
+        // تخزين الملاحظات في المتصفح (localStorage) لتعمل بدون بايثون
+        const noteForm = document.getElementById('noteForm');
+        const noteInput = document.getElementById('noteInput');
+        const notesList = document.getElementById('notesList');
+        let notes = JSON.parse(localStorage.getItem('lawNotesGithub')) || [];
+
+        function renderNotes() {
+            notesList.innerHTML = '';
+            notes.forEach((note, index) => {
+                const div = document.createElement('div');
+                div.className = 'bg-white p-3 rounded-xl shadow-sm border flex justify-between';
+                div.innerHTML = `<span>${note}</span><button onclick="deleteNote(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>`;
+                notesList.appendChild(div);
+            });
+        }
+
+        noteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if(noteInput.value.trim()) {
+                notes.unshift(noteInput.value);
+                localStorage.setItem('lawNotesGithub', JSON.stringify(notes));
+                noteInput.value = '';
+                renderNotes();
+            }
+        });
+
+        window.deleteNote = (index) => {
+            notes.splice(index, 1);
+            localStorage.setItem('lawNotesGithub', JSON.stringify(notes));
+            renderNotes();
+        }
+        renderNotes();
+
+        // المؤقت
+        let time = 25 * 60, interval;
+        const display = document.getElementById('timer');
+        document.getElementById('startBtn').addEventListener('click', function() {
+            if(interval) return;
+            this.textContent = 'جاري العمل...';
+            interval = setInterval(() => {
+                time--;
+                let m = Math.floor(time / 60).toString().padStart(2,'0');
+                let s = (time % 60).toString().padStart(2,'0');
+                display.textContent = `${m}:${s}`;
+                if(time <= 0) { clearInterval(interval); alert('انتهت الجلسة!'); time = 25*60; }
+            }, 1000);
+        });
+
+        // الوضع الليلي
+        document.getElementById('themeBtn').addEventListener('click', () => document.body.classList.toggle('dark-mode'));
+    </script>
+</body>
+</html>
